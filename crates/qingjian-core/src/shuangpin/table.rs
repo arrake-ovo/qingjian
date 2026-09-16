@@ -193,3 +193,55 @@ pub const SOGOU: Table = Table {
     zero_initials: O_PREFIX_ZERO_INITIALS,
     semicolon: true,
 };
+
+/// 基于微软双拼、按 Colemak 改过韵母键（Rime `colemak_custom_mspy`）。
+/// 与标准微软的差异：ao=f、en=t、eng=d、ing=y、un=;、an=n、in=k、uan=p、
+/// ong/iong=r、iang/uang=s、ue=g、uai/ü=j；声母仍是 v/i/u = zh/ch/sh。
+const COLEMAK_MSPY_ZERO_INITIALS: &[(&str, &[&str])] = &[
+    ("a", &["oa", "aa"]),
+    ("ai", &["ol", "al"]),
+    ("an", &["on", "an"]),
+    ("ang", &["oh", "ah"]),
+    ("ao", &["of", "af"]),
+    ("e", &["oe", "ee"]),
+    ("ei", &["oz", "ez"]),
+    ("en", &["ot", "et"]),
+    ("eng", &["od", "ed"]),
+    ("er", &["op", "er"]),
+    ("o", &["oo"]),
+    ("ou", &["ob", "ou"]),
+];
+
+pub const COLEMAK_MSPY: Table = Table {
+    finals: &[
+        ('q', &["iu"]),
+        ('w', &["ia", "ua"]),
+        ('e', &["e"]),
+        ('r', &["iong", "ong"]),
+        ('t', &["en"]),
+        ('y', &["ing"]),
+        ('u', &["u"]),
+        ('i', &["i"]),
+        ('o', &["uo", "o"]),
+        ('p', &["uan", "er"]),
+        ('a', &["a"]),
+        ('s', &["iang", "uang"]),
+        ('d', &["eng"]),
+        ('f', &["ao"]),
+        ('g', &["ue"]),
+        ('h', &["ang"]),
+        ('j', &["uai", "v"]),
+        ('k', &["in"]),
+        ('l', &["ai"]),
+        (';', &["un"]),
+        ('z', &["ei"]),
+        ('x', &["ie"]),
+        ('c', &["iao"]),
+        ('v', &["ui", "ve"]),
+        ('b', &["ou"]),
+        ('n', &["an"]),
+        ('m', &["ian"]),
+    ],
+    zero_initials: COLEMAK_MSPY_ZERO_INITIALS,
+    semicolon: true,
+};

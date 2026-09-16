@@ -22,11 +22,21 @@ pub enum Scheme {
 
     /// 搜狗双拼。
     Sogou,
+
+    /// 基于微软、按 Colemak 改过韵母键（Rime `colemak_custom_mspy`）。
+    #[serde(rename = "colemak_mspy")]
+    ColemakMspy,
 }
 
 impl Scheme {
     /// 全部方案，设置界面按这个顺序列出。
-    pub const ALL: [Self; 4] = [Self::Xiaohe, Self::Ziranma, Self::Microsoft, Self::Sogou];
+    pub const ALL: [Self; 5] = [
+        Self::Xiaohe,
+        Self::Ziranma,
+        Self::Microsoft,
+        Self::Sogou,
+        Self::ColemakMspy,
+    ];
 
     /// 配置文件里的写法。
     pub fn key(self) -> &'static str {
@@ -35,6 +45,7 @@ impl Scheme {
             Self::Ziranma => "ziranma",
             Self::Microsoft => "microsoft",
             Self::Sogou => "sogou",
+            Self::ColemakMspy => "colemak_mspy",
         }
     }
 
@@ -45,6 +56,7 @@ impl Scheme {
             Self::Ziranma => "自然码",
             Self::Microsoft => "微软双拼",
             Self::Sogou => "搜狗双拼",
+            Self::ColemakMspy => "微软双拼（Colemak）",
         }
     }
 
@@ -54,6 +66,7 @@ impl Scheme {
             Self::Ziranma => &table::ZIRANMA,
             Self::Microsoft => &table::MICROSOFT,
             Self::Sogou => &table::SOGOU,
+            Self::ColemakMspy => &table::COLEMAK_MSPY,
         }
     }
 
@@ -204,11 +217,12 @@ mod tests {
                 let decoded = scheme
                     .syllable(keys[0], keys[1])
                     .unwrap_or_else(|| panic!("{scheme}: {syllable} → {keys:?} 解不回"));
-                let expected = match *syllable {
-                    "lue" => "lve",
-                    "nue" => "nve",
-                    "lo" => "luo",
-                    other => other,
+                let expected = match (*syllable, scheme) {
+                    ("lue" | "nue", Scheme::ColemakMspy) => *syllable,
+                    ("lue", _) => "lve",
+                    ("nue", _) => "nve",
+                    ("lo", _) => "luo",
+                    (other, _) => other,
                 };
                 assert_eq!(decoded, expected, "{scheme}: {syllable} → {keys:?}");
             }
@@ -265,6 +279,9 @@ mod tests {
             (Scheme::Microsoft, "oaol", "a'ai"),
             (Scheme::Microsoft, "lv", "lve"),
             (Scheme::Microsoft, "x;", "xing"),
+            (Scheme::ColemakMspy, "nihf", "ni'hao"),
+            (Scheme::ColemakMspy, "x;", "xun"),
+            (Scheme::ColemakMspy, "xg", "xue"),
             (Scheme::Sogou, "nihk", "ni'hao"),
             (Scheme::Sogou, "oe", "e"),
             (Scheme::Sogou, "y;", "ying"),
