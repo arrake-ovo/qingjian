@@ -19,6 +19,8 @@ description: 青简在 macOS 与 Windows 上的全部按键与缺省快捷键：
 
 Windows 的主键盘数字和常用标点按当前系统键盘布局识别；非美式布局的字母、AltGr 和组合音符输入仍有局限。
 
+本 fork 另提供「微软双拼（Colemak）」方案，其中 `;` 是韵母 un（如 `x;` → xun）。完整键位差异见 [模糊音与双拼](../input/fuzzy-and-shuangpin.md)。
+
 ## 输入组句时（拼音 / 注音）
 
 | 操作 | macOS | Windows |

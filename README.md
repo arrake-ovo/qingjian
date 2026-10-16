@@ -1,5 +1,7 @@
 # 青简 Qingjian
 
+本仓库是 [qingjian-team/qingjian](https://github.com/qingjian-team/qingjian) 的个人定制 fork，新增 Colemak 微软双拼方案。定制版下载见 [Releases](https://github.com/arrake-ovo/qingjian/releases)，与上游的区别及安装方式见 [定制版说明](docs/notes/colemak-mspy.md)。
+
 > 输入的不只是文字。
 
 青简（Qingjian）是一个使用 **Rust** 开发的跨平台输入法。

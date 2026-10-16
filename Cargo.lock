@@ -2601,7 +2601,7 @@ dependencies = [
 
 [[package]]
 name = "qingjian-macos"
-version = "0.1.3-dev"
+version = "0.1.3-colemak.1"
 dependencies = [
  "dotenvy",
  "jiff",

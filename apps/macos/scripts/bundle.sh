@@ -67,7 +67,16 @@ cp apps/macos/scripts/uninstall.sh "$APP/Contents/Resources/uninstall.sh"
 cp -R apps/macos/resources/*.lproj "$APP/Contents/Resources/"
 # 词库与释义表打进 Resources。data/generated/ 里有生成好的产品数据（自建词库 + 语言模型 + LLM 释义表）就用它，
 # 否则用 assets/sample/ 的样例。没有数据管道的机器跑 tools/release/data-fetch.sh 按 tools/release/data.lock 下载。
-cp assets/sample/*.tsv "$APP/Contents/Resources/"
+# 没有 data/generated 时用完整 lexicon，不要只打 100 来条样例（否则「看」「爱」都没有）。
+if [[ -f assets/lexicon/dict.tsv ]]; then
+  cp assets/lexicon/dict.tsv "$APP/Contents/Resources/"
+  [[ -f assets/lexicon/english.tsv ]] && cp assets/lexicon/english.tsv "$APP/Contents/Resources/"
+  for g in assets/glossary/glossary-*.tsv; do
+    [[ -f "$g" ]] && cp "$g" "$APP/Contents/Resources/"
+  done
+else
+  cp assets/sample/*.tsv "$APP/Contents/Resources/"
+fi
 # emoji 表（Unicode CLDR，可发布）
 cp assets/emoji/*.tsv "$APP/Contents/Resources/"
 # 词汇等级表（CEFR-J / Octanove / JLPT，见 assets/levels/README.md），「统计」页按级数词汇

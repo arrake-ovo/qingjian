@@ -28,3 +28,5 @@ README.md 只介绍项目，所有技术内容放在这里，分四类：前三�
 | [notes/windows-win10.md](notes/windows-win10.md) | Windows 10 与设置程序（2026-09-13）：Reactor 早期绑定 Windows 11 才有的 AppModel API 导致加载期失败，改自包含部署 + 延迟加载 |
 
 约定：文档写中文，代码标识符一律英文。实现与文档产生分歧时以代码为准，并同步更新文档。
+
+| [notes/colemak-mspy.md](notes/colemak-mspy.md) | 个人 fork：Colemak 微软双拼、安装包、构建与 Nix 配置的关系 |
