@@ -6,6 +6,7 @@
 
 - 新增 `colemak_mspy`，偏好设置中显示「微软双拼（Colemak）」，对应个人 Rime `colemak_custom_mspy`。
 - 修正没有生成词库时的打包回退：优先带完整 lexicon，而非仅示例词库。
+- 兼容新版 pkgbuild 分析结果省略重定位字段的情况，确保安装位置固定。
 - 本次发布版本为 `0.1.3-colemak.1`，仅提供 macOS Apple Silicon（arm64）编译包；没有构建 Intel 或 Windows 包。
 
 声母仍是 `v/i/u = zh/ch/sh`，韵母与标准微软双拼的主要差异如下：
